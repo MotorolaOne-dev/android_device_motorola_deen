@@ -71,16 +71,30 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 #A/B related packages
 PRODUCT_PACKAGES += \
+    otapreopt_script \
+    cppreopts.sh \
     update_engine \
     update_engine_client \
+    update_engine_sideload \
     update_verifier \
-    bootctrl.msm8953 \
     brillo_update_payload \
     android.hardware.boot@1.0-impl \
     android.hardware.boot@1.0-service
 
 #Boot control HAL test app
-PRODUCT_PACKAGES_DEBUG += bootctl
+PRODUCT_PACKAGES_DEBUG += bootctl update_engine_client
+
+# Boot control HAL
+PRODUCT_PACKAGES += \
+    bootctrl.msm8953 \
+
+# Enable update engine sideloading by including the static version of the
+# boot_control HAL and its dependencies.
+PRODUCT_STATIC_BOOT_CONTROL_HAL := \
+    bootctrl.msm8953 \
+    libgptutils \
+    libz \
+    libcutils
 
 # Audio
 PRODUCT_PACKAGES += \
