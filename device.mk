@@ -69,6 +69,19 @@ PRODUCT_PROPERTY_OVERRIDES += \
     dalvik.vm.heapminfree=512k \
     dalvik.vm.heapmaxfree=8m
 
+#A/B related packages
+PRODUCT_PACKAGES += \
+    update_engine \
+    update_engine_client \
+    update_verifier \
+    bootctrl.msm8953 \
+    brillo_update_payload \
+    android.hardware.boot@1.0-impl \
+    android.hardware.boot@1.0-service
+
+#Boot control HAL test app
+PRODUCT_PACKAGES_DEBUG += bootctl
+
 # Audio
 PRODUCT_PACKAGES += \
     android.hardware.audio@2.0-impl \
@@ -282,7 +295,7 @@ PRODUCT_PACKAGES += \
 
 # Thermal
 PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/configs/thermal-engine-addison.conf:system/etc/thermal-engine-addison.conf
+    $(LOCAL_PATH)/configs/thermal-engine-deen.conf:system/etc/thermal-engine-deen.conf
 
 PRODUCT_PACKAGES += \
     android.hardware.thermal@1.0-impl \
@@ -294,7 +307,7 @@ PRODUCT_PACKAGES += \
 
 # Vibrator HAL
 PRODUCT_PACKAGES += \
-    android.hardware.vibrator@1.0-service.addison
+    android.hardware.vibrator@1.0-service
 
 # Wifi
 PRODUCT_PACKAGES += \

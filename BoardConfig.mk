@@ -14,9 +14,9 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
--include vendor/motorola/addison/BoardConfigVendor.mk
+-include vendor/motorola/deen/BoardConfigVendor.mk
 
-DEVICE_PATH := device/motorola/addison
+DEVICE_PATH := device/motorola/deen
 
 BOARD_VENDOR := motorola-qcom
 
@@ -53,11 +53,13 @@ TARGET_2ND_CPU_VARIANT := cortex-a53
 TARGET_USES_64_BIT_BINDER := true
 
 # Asserts
-TARGET_OTA_ASSERT_DEVICE := addison,addison_retail
+TARGET_OTA_ASSERT_DEVICE := deen,deen_sprout
 
 # Kernel
 BOARD_KERNEL_CMDLINE := console=ttyHSL0,115200,n8 androidboot.console=ttyHSL0 androidboot.hardware=qcom user_debug=30 msm_rtb.filter=0x237
 BOARD_KERNEL_CMDLINE += ehci-hcd.park=3 androidboot.bootdevice=7824900.sdhci lpm_levels.sleep_disabled=1 vmalloc=350M
+# For the love of all that is holy, please do not include this in your ROM unless you really want TWRP to not work correctly!
+BOARD_KERNEL_CMDLINE += androidboot.fastboot=1
 BOARD_KERNEL_BASE := 0x80000000
 BOARD_KERNEL_IMAGE_NAME := Image.gz
 BOARD_KERNEL_LZ4C_DT := true
@@ -65,7 +67,7 @@ BOARD_KERNEL_PAGESIZE := 2048
 BOARD_KERNEL_SEPARATED_DT := true
 BOARD_MKBOOTIMG_ARGS := --ramdisk_offset 0x01000000 --tags_offset 0x00000100
 TARGET_KERNEL_CLANG_COMPILE := true
-TARGET_KERNEL_CONFIG := addison_defconfig
+TARGET_KERNEL_CONFIG := deen_defconfig
 TARGET_KERNEL_SOURCE := kernel/motorola/msm8953
 LZMA_RAMDISK_TARGETS := recovery
 
@@ -101,6 +103,7 @@ BOARD_NO_CHARGER_LED := true
 # Crypto
 TARGET_HW_DISK_ENCRYPTION := true
 TARGET_KEYMASTER_WAIT_FOR_QSEE := true
+PLATFORM_SECURITY_PATCH := 2025-12-31
 
 # Display
 BOARD_USES_ADRENO := true
@@ -121,11 +124,16 @@ TARGET_USES_MEDIA_EXTENSIONS := true
 # Partitions
 BOARD_FLASH_BLOCK_SIZE := 131072
 BOARD_CACHEIMAGE_FILE_SYSTEM_TYPE := ext4
-BOARD_BOOTIMAGE_PARTITION_SIZE := 16777216        #    16384 * 1024 mmcblk0p37
+BOARD_BOOTIMAGE_PARTITION_SIZE := 16777216        #    19384 * 1024 mmcblk0p37
 BOARD_CACHEIMAGE_PARTITION_SIZE := 268435456      #   262144 * 1024 mmcblk0p52
-#BOARD_RECOVERYIMAGE_PARTITION_SIZE := 16879616    #    16484 * 1024 mmcblk0p38
+#BOARD_RECOVERYIMAGE_PARTITION_SIZE := 19252799    #    16484 * 1024 mmcblk0p38
 BOARD_SYSTEMIMAGE_PARTITION_SIZE := 4294967296    #  4194304 * 1024 mmcblk0p53
 BOARD_USERDATAIMAGE_PARTITION_SIZE := 25614597120 # 25014255 * 1024 mmcblk0p54
+
+# Partitions A/B 
+AB_OTA_UPDATER := true
+AB_OTA_PARTITIONS ?= boot system
+BOARD_BUILD_SYSTEM_ROOT_IMAGE := true
 
 # Power
 TARGET_POWERHAL_VARIANT := qcom
@@ -144,32 +152,11 @@ TARGET_RELEASETOOLS_EXTENSIONS := $(DEVICE_PATH)
 
 # SELinux
 include device/qcom/sepolicy/sepolicy.mk
-BOARD_SEPOLICY_DIRS += $(DEVICE_PATH)/sepolicy
-
-# Shim
-TARGET_LD_SHIM_LIBS := \
-    /system/vendor/lib64/libmdmcutback.so|libqsap_shim.so \
-    /system/vendor/lib64/libsensorndkbridge.so|libshim_ril.so \
-    /system/lib/libjustshoot.so|libjustshoot_shim.so
-
-# Sensors
-BOARD_USES_MOT_SENSOR_HUB := true
-MOT_AP_SENSOR_HW_REARPROX := true
-MOT_SENSOR_HUB_HW_BMI160 := true
-MOT_SENSOR_HUB_HW_TYPE_L4 := true
-
-MOT_SENSOR_HUB_FEATURE_CAMFSYNC := true
-MOT_SENSOR_HUB_FEATURE_CHOPCHOP := true
-MOT_SENSOR_HUB_FEATURE_GR := true
-MOT_SENSOR_HUB_FEATURE_LA := true
-MOT_SENSOR_HUB_FEATURE_LIFT := true
-MOT_SENSOR_HUB_FEATURE_PEDO := true
-MOT_SENSOR_HUB_FEATURE_ULTRASOUND := true
+#BOARD_SEPOLICY_DIRS += $(DEVICE_PATH)/sepolicy
 
 # Soong
 PRODUCT_SOONG_NAMESPACES += \
-    $(DEVICE_PATH)/libhidl \
-    $(DEVICE_PATH)/libshims
+    $(DEVICE_PATH)/libhidl
 
 # Wifi
 BOARD_HAS_QCOM_WLAN := true

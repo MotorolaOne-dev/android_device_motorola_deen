@@ -14,11 +14,11 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-$(call inherit-product, device/motorola/addison/full_addison.mk)
+$(call inherit-product, device/motorola/deen/full_deen.mk)
 
 ## Device identifier. This must come after all inclusions
-PRODUCT_DEVICE := addison
-PRODUCT_NAME := aosp_addison
+PRODUCT_DEVICE := deen
+PRODUCT_NAME := aosp_deen
 PRODUCT_BRAND := motorola
 PRODUCT_MANUFACTURER := motorola
 
@@ -27,7 +27,7 @@ PRODUCT_SYSTEM_PROPERTY_BLACKLIST := \
     ro.product.vendor.model
 
 PRODUCT_BUILD_PROP_OVERRIDES += \
-    PRIVATE_BUILD_DESC="addison-user 8.0.0 OPNS27.76-12-22-9 10 release-keys" \
-    PRODUCT_NAME="Moto Z Play"
+    PRIVATE_BUILD_DESC="een-user 9 PPK29.68-16-8 536e6 release-keys" \
+    PRODUCT_NAME="Motorola One"
 
-BUILD_FINGERPRINT=motorola/addison/addison:8.0.0/OPNS27.76-12-22-9/10:user/release-keys
+BUILD_FINGERPRINT=motorola/deen/deen_sprout:9/PPK29.68-16-8/536e6:user/release-keys

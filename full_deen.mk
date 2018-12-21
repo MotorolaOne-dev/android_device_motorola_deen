@@ -14,11 +14,11 @@
 # limitations under the License.
 #
 
-# Inherit from addison device
-$(call inherit-product, device/motorola/addison/device.mk)
+# Inherit from deen device
+$(call inherit-product, device/motorola/deen/device.mk)
 
 # Device identifier. This must come after all inclusions
-PRODUCT_DEVICE := addison
-PRODUCT_NAME := full_addison
+PRODUCT_DEVICE := deen
+PRODUCT_NAME := full_deen
 
-$(call inherit-product-if-exists, vendor/motorola/addison/addison-vendor.mk)
+$(call inherit-product-if-exists, vendor/motorola/deen/deen-vendor.mk)
