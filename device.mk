@@ -321,7 +321,7 @@ PRODUCT_PACKAGES += \
 
 # Vibrator HAL
 PRODUCT_PACKAGES += \
-    android.hardware.vibrator@1.0-service
+    android.hardware.vibrator@1.0-service.deen
 
 # Wifi
 PRODUCT_PACKAGES += \
