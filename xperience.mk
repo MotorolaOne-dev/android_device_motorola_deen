@@ -27,7 +27,7 @@ PRODUCT_SYSTEM_PROPERTY_BLACKLIST := \
     ro.product.vendor.model
 
 PRODUCT_BUILD_PROP_OVERRIDES += \
-    PRIVATE_BUILD_DESC="een-user 9 PPK29.68-16-8 536e6 release-keys" \
+    PRIVATE_BUILD_DESC="deen-user 9 PPK29.68-16-8 536e6 release-keys" \
     PRODUCT_NAME="Motorola One"
 
 BUILD_FINGERPRINT=motorola/deen/deen_sprout:9/PPK29.68-16-8/536e6:user/release-keys
