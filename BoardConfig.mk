@@ -56,10 +56,10 @@ TARGET_USES_64_BIT_BINDER := true
 TARGET_OTA_ASSERT_DEVICE := deen,deen_sprout
 
 # Kernel
-BOARD_KERNEL_CMDLINE := console=ttyHSL0,115200,n8 androidboot.console=ttyHSL0 androidboot.hardware=qcom user_debug=30 msm_rtb.filter=0x237
-BOARD_KERNEL_CMDLINE += ehci-hcd.park=3 androidboot.bootdevice=7824900.sdhci lpm_levels.sleep_disabled=1 vmalloc=350M
+BOARD_KERNEL_CMDLINE := androidboot.hardware=qcom ehci-hcd.park=3 androidboot.bootdevice=7824900.sdhci androidboot.hab.product=deen
+BOARD_KERNEL_CMDLINE += androidboot.selinux=permissive
 # For the love of all that is holy, please do not include this in your ROM unless you really want TWRP to not work correctly!
-BOARD_KERNEL_CMDLINE += androidboot.fastboot=1
+#BOARD_KERNEL_CMDLINE += androidboot.fastboot=1
 BOARD_KERNEL_BASE := 0x80000000
 BOARD_KERNEL_IMAGE_NAME := Image.gz
 BOARD_KERNEL_LZ4C_DT := true
@@ -143,6 +143,10 @@ AB_OTA_POSTINSTALL_CONFIG += \
 
 # Power
 TARGET_POWERHAL_VARIANT := qcom
+
+# Verified Boot
+BOARD_AVB_ENABLE := false
+BOARD_BUILD_DISABLED_VBMETAIMAGE := true
 
 # Qualcomm support
 BOARD_USES_QCOM_HARDWARE := true
